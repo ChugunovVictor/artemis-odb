@@ -14,6 +14,7 @@ import com.gamadu.EntityFactory;
 import com.gamadu.components.Player;
 import com.gamadu.components.Position;
 import com.gamadu.components.Velocity;
+import com.gamadu.components.Weapon;
 
 public class PlayerInputSystem extends EntityProcessingSystem implements InputProcessor {
     private static final float HorizontalThrusters = 300;
@@ -26,6 +27,8 @@ public class PlayerInputSystem extends EntityProcessingSystem implements InputPr
     ComponentMapper<Position> pm;
     @Wire
     ComponentMapper<Velocity> vm;
+    @Wire
+    ComponentMapper<Weapon> wm;
 
     private boolean up, down, left, right;
     private boolean shoot;
@@ -50,6 +53,7 @@ public class PlayerInputSystem extends EntityProcessingSystem implements InputPr
     protected void process(Entity e) {
         Position position = pm.get(e);
         Velocity velocity = vm.get(e);
+        Weapon weapon = wm.get(e);
 
         mouseVector.set(Gdx.input.getX(), Gdx.input.getY(), 0);
         camera.unproject(mouseVector);
@@ -64,26 +68,41 @@ public class PlayerInputSystem extends EntityProcessingSystem implements InputPr
 
         position.x = mouseVector.x;
         position.y = mouseVector.y;
-		
-		/*
-		if(up) {
-			velocity.vectorY = MathUtils.clamp(velocity.vectorY+(world.getDeltaFloat()*VerticalThrusters), -VerticalMaxSpeed, VerticalMaxSpeed);
-		}
-		if(down) {
-			velocity.vectorY = MathUtils.clamp(velocity.vectorY-(world.getDeltaFloat()*VerticalThrusters), -VerticalMaxSpeed, VerticalMaxSpeed);
-		}
-		
-		if(left) {
-			velocity.vectorX = MathUtils.clamp(velocity.vectorX-(world.getDeltaFloat()*HorizontalThrusters), -HorizontalMaxSpeed, HorizontalMaxSpeed);
-		}
-		if(right) {
-			velocity.vectorX = MathUtils.clamp(velocity.vectorX+(world.getDeltaFloat()*HorizontalThrusters), -HorizontalMaxSpeed, HorizontalMaxSpeed);
-		}*/
+
+        /*
+        if(up) {
+            velocity.vectorY = MathUtils.clamp(velocity.vectorY+(world.getDeltaFloat()*VerticalThrusters), -VerticalMaxSpeed, VerticalMaxSpeed);
+        }
+        if(down) {
+            velocity.vectorY = MathUtils.clamp(velocity.vectorY-(world.getDeltaFloat()*VerticalThrusters), -VerticalMaxSpeed, VerticalMaxSpeed);
+        }
+
+        if(left) {
+            velocity.vectorX = MathUtils.clamp(velocity.vectorX-(world.getDeltaFloat()*HorizontalThrusters), -HorizontalMaxSpeed, HorizontalMaxSpeed);
+        }
+        if(right) {
+            velocity.vectorX = MathUtils.clamp(velocity.vectorX+(world.getDeltaFloat()*HorizontalThrusters), -HorizontalMaxSpeed, HorizontalMaxSpeed);
+        }*/
 
         if (shoot) {
             if (timeToFire <= 0) {
-                EntityFactory.createPlayerBullet(world, position.x - 27, position.y + 2);
-                EntityFactory.createPlayerBullet(world, position.x + 27, position.y + 2);
+                switch (weapon.force) {
+                    case 1: {
+                        EntityFactory.createPlayerBullet(world, position.x, position.y + 54);
+                        break;
+                    }
+                    case 2: {
+                        EntityFactory.createPlayerBullet(world, position.x - 27, position.y + 2);
+                        EntityFactory.createPlayerBullet(world, position.x + 27, position.y + 2);
+                        break;
+                    }
+                    case 3: {
+                        EntityFactory.createPlayerBullet(world, position.x - 27, position.y + 2);
+                        EntityFactory.createPlayerBullet(world, position.x, position.y + 54);
+                        EntityFactory.createPlayerBullet(world, position.x + 27, position.y + 2);
+                        break;
+                    }
+                }
                 timeToFire = FireRate;
             }
         }

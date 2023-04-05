@@ -7,7 +7,9 @@ import com.artemis.EntitySystem;
 import com.artemis.annotations.Wire;
 import com.artemis.utils.Bag;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -58,6 +60,16 @@ public class SpriteRenderSystem extends EntitySystem {
         TextureRegion fontRegion = new TextureRegion(fontTexture);
         font = new BitmapFont(Gdx.files.internal("fonts/normal.fnt"), fontRegion, false);
         font.setUseIntegerPositions(false);
+
+        setCursor();
+    }
+
+    private void setCursor(){
+        Pixmap pixmap = new Pixmap(Gdx.files.internal("textures/fighter.png"));
+        int xHotspot = pixmap.getWidth() / 2, yHotspot = pixmap.getHeight() / 2;
+        Cursor cursor = Gdx.graphics.newCursor(pixmap, xHotspot, yHotspot);
+        pixmap.dispose();
+        Gdx.graphics.setCursor(cursor);
     }
 
     @Override

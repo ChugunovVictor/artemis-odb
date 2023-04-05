@@ -9,6 +9,8 @@ public class Sprite extends Component {
 		ACTORS_1,
 		ACTORS_2,
 		ACTORS_3,
+
+		ACTORS_4,
 		PARTICLES;
 		
 		public int getLayerId() {

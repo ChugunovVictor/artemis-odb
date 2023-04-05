@@ -14,10 +14,13 @@ import com.gamadu.EntityFactory;
 import com.gamadu.components.Bounds;
 import com.gamadu.components.Health;
 import com.gamadu.components.Position;
+import com.gamadu.components.Weapon;
 
 public class CollisionSystem extends EntitySystem {
     @Wire
     ComponentMapper<Position> pm;
+    @Wire
+    ComponentMapper<Weapon> wm;
     @Wire
     ComponentMapper<Bounds> bm;
     @Wire
@@ -51,6 +54,16 @@ public class CollisionSystem extends EntitySystem {
                     Constants.totalDeleted.incrementAndGet();
                     EntityFactory.createExplosion(world, position.x, position.y, 0.5f);
                 }
+            }
+        }));
+
+        collisionPairs.add(new CollisionPair(Constants.Groups.PLAYER_SHIP, Constants.Groups.WEAPONS, new CollisionHandler() {
+            @Override
+            public void handleCollision(Entity player, Entity weapon) {
+                Weapon from = wm.get(weapon);
+                Weapon to = wm.get(player);
+                to.force = from.force;
+                weapon.deleteFromWorld();
             }
         }));
     }

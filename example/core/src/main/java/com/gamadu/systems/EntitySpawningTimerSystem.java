@@ -12,6 +12,7 @@ public class EntitySpawningTimerSystem extends BaseSystem {
     private Timer timer1;
     private Timer timer2;
     private Timer timer3;
+    private Timer timer4;
 
     public EntitySpawningTimerSystem() {
         timer1 = new Timer(2, true) {
@@ -34,6 +35,14 @@ public class EntitySpawningTimerSystem extends BaseSystem {
                 EntityFactory.createEnemyShip(world, "enemy3", Sprite.Layer.ACTORS_1, 60, MathUtils.random(-SpaceshipWarrior.FRAME_WIDTH / 2, SpaceshipWarrior.FRAME_WIDTH / 2), SpaceshipWarrior.FRAME_HEIGHT / 2 + 200, 0, -20, 70);
             }
         };
+
+        timer4 = new Timer(12, true) {
+            @Override
+            public void execute() {
+                int force = MathUtils.random(1,3);
+                EntityFactory.createWeapon(world, "weapon" + force, force, Sprite.Layer.ACTORS_4, MathUtils.random(-SpaceshipWarrior.FRAME_WIDTH / 2, SpaceshipWarrior.FRAME_WIDTH / 2), SpaceshipWarrior.FRAME_HEIGHT / 2 + 50, 0, -40, 20);
+            }
+        };
     }
 
     @Override
@@ -41,6 +50,7 @@ public class EntitySpawningTimerSystem extends BaseSystem {
         timer1.update(world.delta);
         timer2.update(world.delta);
         timer3.update(world.delta);
+        timer4.update(world.delta);
     }
 
 }

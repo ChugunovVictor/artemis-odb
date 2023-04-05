@@ -9,7 +9,7 @@ import com.gamadu.utils.ImagePacker;
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
     public static void main(String[] args) {
-        // ImagePacker.run();
+        //ImagePacker.run();
         createApplication();
     }
 

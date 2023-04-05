@@ -6,57 +6,78 @@ filter: Linear, Linear
 repeat: none
 bullet
   rotate: false
-  xy: 664, 821
+  xy: 282, 302
   size: 3, 10
   orig: 3, 10
   offset: 0, 0
   index: -1
 enemy1
   rotate: false
-  xy: 282, 271
+  xy: 282, 314
   size: 46, 46
   orig: 46, 46
   offset: 0, 0
   index: -1
 enemy2
   rotate: false
-  xy: 516, 701
+  xy: 516, 744
   size: 146, 130
   orig: 146, 130
   offset: 0, 0
   index: -1
 enemy3
   rotate: false
-  xy: 2, 95
+  xy: 2, 138
   size: 278, 222
   orig: 278, 222
   offset: 0, 0
   index: -1
 explosion
   rotate: false
-  xy: 2, 319
+  xy: 2, 362
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 fighter
   rotate: false
-  xy: 2, 7
+  xy: 2, 50
   size: 70, 86
   orig: 70, 86
   offset: 0, 0
   index: -1
 particle
   rotate: false
-  xy: 2, 2
+  xy: 330, 357
   size: 3, 3
   orig: 3, 3
   offset: 0, 0
   index: -1
 star
   rotate: false
-  xy: 516, 679
+  xy: 74, 116
   size: 18, 20
   orig: 18, 20
+  offset: 0, 0
+  index: -1
+weapon1
+  rotate: false
+  xy: 516, 696
+  size: 46, 46
+  orig: 46, 46
+  offset: 0, 0
+  index: -1
+weapon2
+  rotate: false
+  xy: 664, 828
+  size: 46, 46
+  orig: 46, 46
+  offset: 0, 0
+  index: -1
+weapon3
+  rotate: false
+  xy: 2, 2
+  size: 46, 46
+  orig: 46, 46
   offset: 0, 0
   index: -1

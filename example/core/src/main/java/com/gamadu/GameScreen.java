@@ -53,7 +53,6 @@ public class GameScreen implements Screen {
 		for(int i = 0; 500 > i; i++) {
 			EntityFactory.createStar(world);
 		}
-		
 	}
 
 	@Override

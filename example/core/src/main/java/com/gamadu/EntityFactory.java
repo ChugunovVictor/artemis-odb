@@ -17,6 +17,7 @@ public class EntityFactory {
 		position.y = y;
 		e.edit().add(position);
 
+		/*
 		Sprite sprite = new Sprite();
 		sprite.name = "fighter";
 		sprite.r = 93/255f;
@@ -24,6 +25,7 @@ public class EntityFactory {
 		sprite.b = 129/255f;
 		sprite.layer = Sprite.Layer.ACTORS_3;
 		e.edit().add(sprite);
+		*/
 
 		Velocity velocity = new Velocity();
 		velocity.vectorX = 0;
@@ -35,8 +37,11 @@ public class EntityFactory {
 		bounds.radius = 43;
 		e.edit().add(bounds);
 
-		e.edit().add(new Player());
+		Weapon weapon = new Weapon();
+		weapon.force = 1;
+		e.edit().add(weapon);
 
+		e.edit().add(new Player());
 
 		world.getSystem(GroupManager.class).add(e, Constants.Groups.PLAYER_SHIP);
 		
@@ -72,6 +77,42 @@ public class EntityFactory {
 
 		world.getSystem(GroupManager.class).add(e, Constants.Groups.PLAYER_BULLETS);
 		
+		return e;
+	}
+
+	public static Entity createWeapon(World world, String name, int force, Sprite.Layer layer, float x, float y, float velocityX, float velocityY, float boundsRadius) {
+		Entity e = world.createEntity();
+		Constants.totalCreated.incrementAndGet();
+
+		Position position = new Position();
+		position.x = x;
+		position.y = y;
+		e.edit().add(position);
+
+		Sprite sprite = new Sprite();
+		sprite.name = name;
+		sprite.r = 0/255f;
+		sprite.g = 293/255f;
+		sprite.b = 255/255f;
+		sprite.layer = layer;
+		e.edit().add(sprite);
+
+		Velocity velocity = new Velocity();
+		velocity.vectorX = velocityX;
+		velocity.vectorY = velocityY;
+		e.edit().add(velocity);
+
+		Bounds bounds = new Bounds();
+		bounds.radius = boundsRadius;
+		e.edit().add(bounds);
+
+		Weapon weapon = new Weapon();
+		weapon.force = force;
+		e.edit().add(weapon);
+
+		world.getSystem(GroupManager.class).add(e, Constants.Groups.WEAPONS);
+
+
 		return e;
 	}
 	
@@ -122,10 +163,10 @@ public class EntityFactory {
 		Sprite sprite = new Sprite();
 		sprite.name = "explosion";
 		sprite.scaleX = sprite.scaleY = scale;
-		sprite.r = 1;
-		sprite.g = 216/255f;
-		sprite.b = 0;
-		sprite.a = 0.5f;
+		sprite.r = 255/255f;
+		sprite.g = 250/255f;
+		sprite.b = 0/255f;
+		sprite.a = 0.75f;
 		sprite.layer = Sprite.Layer.PARTICLES;
 		e.edit().add(sprite);
 
@@ -189,10 +230,10 @@ public class EntityFactory {
 		Sprite sprite = new Sprite();
 		sprite.name = "particle";
 		sprite.scaleX = sprite.scaleY = MathUtils.random(0.3f, 0.6f);
-		sprite.r = 1;
-		sprite.g = 216/255f;
-		sprite.b = 0;
-		sprite.a = 0.5f;
+		sprite.r = 255/255f;
+		sprite.g = 250/255f;
+		sprite.b = 0/255f;
+		sprite.a = 0.75f;
 		sprite.layer = Sprite.Layer.PARTICLES;
 		e.edit().add(sprite);
 
